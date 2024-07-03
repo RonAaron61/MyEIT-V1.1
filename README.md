@@ -32,6 +32,8 @@ intro
 
 The Electrical Impedance Tomography (EIT) that is made consists of several components such as the AD9833 module, amplifier, High Pass Filter, instrument amplifier, VCCS, multi/demultiplexer, AC DC converter, ADC, and of course, the microcontroller which uses the ESP32-S2
 
+<img src="assets/image/DiagramEIT.png" width=700></img>
+
 ---
 
 ## Components
@@ -40,7 +42,7 @@ The Electrical Impedance Tomography (EIT) that is made consists of several compo
 
 The function of VCCS is to get current sources that can be controlled using the input voltage, so the current doesn't exceed some limit. The VCCS that I used is the Discrete Improved Howland Current Pump With Buffer, based on
 
-> [Creegan A. et al. (2024)](https://doi.org/10.1016/j.ohx.2024.e00521)
+> [Creegan A. et al., (2024) A Wearable Open-Source electrical impedance tomography device](https://doi.org/10.1016/j.ohx.2024.e00521)
 
 > [Ignacio V. L., Analysis of Improved Howland Current Pump Configurations](https://www.ti.com/lit/an/sboa437a/sboa437a.pdf?.)
 
@@ -103,8 +105,9 @@ Multi/Demultiplexer used is CD74HC4067 Module
 
 <img src="assets/image/s2_mini_front.jpg" width=300/> <img src="assets/image/s2_mini_back.jpg" width=300/>
 
-For the microcontroller, I use Wemos S2 Mini, a mini wifi boards based ESP32-S2FN4R2. The reason I use this board is because of the compact size and it has lot of GPIO pin to use, because to drive the multi/demultiplexer I need at least 16 IO pin, then 2 pin for SDA/SCL, and 3 SPI connection
+For the microcontroller, I use Wemos S2 Mini, a mini wifi boards based ESP32-S2FN4R2. The reason I use this board is because of the compact size and it has lot of GPIO pin to use, because to drive the multi/demultiplexer I need at least 16 IO pins, then 2 pins for SDA/SCL, and 3 SPI connections
 
+---
 
 ## Result
 
@@ -124,4 +127,25 @@ The peak-detector not working smoothly and reduces the voltage by around 6%, whi
 
 with, $voltage = voltage + (voltage* 6/100)$
 
+### Reconstructed image
+
+### Electrode Housing
+
+test
+
+### Thorax
+
+Attempt to try to reconstruct the thorax area using 16 electrodes attached using disposable ECG Electrode with pre-gelled AG/AGCL sensor
+
+The experiment starts with first collecting 10 data and averaging them to be used as the reference data, after that the actual data is then collected and reconstructed using JAC (One-step Gauss-Newton) method. Based on the result the data collected is very fluctuating especially when the subject is moving. However, when the data collected is in good numbers, the data can be reconstructed resulting in two objects in the middle of the image, which are assumed to be lungs.
+
+An example of the image when the data was good and the subject was not moving,
+
+<img src="assets/image/Thorax_1.png" width=800></img>
+
+and most of the time the data is very fluctuating resulting in a higher number than it should be, 
+
+<img src="assets/image/Thorax_2.png" width=800></img>
+
+as for now, it is not clear what caused this, as I'm not able to analyze the data because my Oscilloscope is currently not accessible
 

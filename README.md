@@ -122,11 +122,11 @@ For the microcontroller, I use Wemos S2 Mini, a mini wifi boards based ESP32-S2F
 
 ### Peak-detector calibration
 
-The peak-detector not working smoothly and reduces the voltage by around 6%, which needs to be re-calibrate on the ADC
+The peak-detector not working smoothly and reduces the voltage by around 17%, which needs to be re-calibrate on the ADC
 
 <img src="assets/image/ADC_Cal.png" width=650></img>
 
-with, $voltage = voltage + (voltage* 6/100)$
+with, $voltage = voltage + (voltage* 17/100)$
 
 ### Reconstructed image
 

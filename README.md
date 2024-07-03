@@ -24,7 +24,9 @@ abstract
 
 ## Introduction
 
-intro
+Electrical impedance tomography (EIT) is a non-invasive, radiation-free medical imaging technique. It's used to image the electrical impedance variations inside a volume of interest. In this project, I made an EIT using an ESP32-S2 microcontroller, and the EIT that was made had a total of 16 electrodes. One of the goals of this project is to create an EIT that is cheap and easy to create and use.
+
+Previously I had made the same EIT device, this model is an improvement based on the previous. A couple of changes were the adding buffer and resistor value changes in VCCS, positive to negative voltage is now using TPS60400, Some DIP components changed to SMD components for simplicity and more compact size, adding the calibration equation to the ADS1115
 
 ---
 
@@ -97,9 +99,8 @@ For the ADC I don't use the Microcontroller ADC but I use a module, I use the AD
 
 ### Multi/Demultiplexer
 
-Multi/Demultiplexer used is CD74HC4067 Module
+Multi/Demultiplexer used is CD74HC4067 ICs which is a 16 channel multiplexer and demultiplexer
 
-<img src="assets/image/CD74HC4067.jpg" width=500></img>
 
 ### ESP32-S2 (Wemos S2 mini)
 
@@ -137,15 +138,16 @@ test
 
 Attempt to try to reconstruct the thorax area using 16 electrodes attached using disposable ECG Electrode with pre-gelled AG/AGCL sensor
 
-The experiment starts with first collecting 10 data and averaging them to be used as the reference data, after that the actual data is then collected and reconstructed using JAC (One-step Gauss-Newton) method. Based on the result the data collected is very fluctuating especially when the subject is moving. However, when the data collected is in good numbers, the data can be reconstructed resulting in two objects in the middle of the image, which are assumed to be lungs.
+The experiment starts with first collecting 10 data and averaging them to be used as the reference data, after that the actual data is then collected and reconstructed using JAC (One-step Gauss-Newton) method. The signal injected was using a 40kHz sine wave at around 0.4 mA. Based on the result, the data collected fluctuates, especially when the subject is moving. However, when the data collected is in good numbers, the data can be reconstructed resulting in two objects in the middle of the image, which are assumed to be lungs.
 
 An example of the image when the data was good and the subject was not moving,
 
-<img src="assets/image/Thorax_1.png" width=800></img>
+<img src="assets/image/Thorax_1.png" width=900></img>
 
 and most of the time the data is very fluctuating resulting in a higher number than it should be, 
 
-<img src="assets/image/Thorax_2.png" width=800></img>
+<img src="assets/image/Thorax_2.png" width=900></img>
 
 as for now, it is not clear what caused this, as I'm not able to analyze the data because my Oscilloscope is currently not accessible
 
+---

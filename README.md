@@ -64,6 +64,10 @@ So, if using the same voltage as the previous version,
 
 $I_{VCCSOut} = \frac {500mV} {1000} = 0.5mA$
 
+When tested using 0.32 Vrms at 40kHz the current was stable at average around 0.34 mA from 55Ω up to 7 kΩ
+
+<img src="assets/image/VCCS_Data_rms.png" width=650></img>
+
 ### Instrument Amplifier
 
 The instrument amplifier functions as an amplifier from two different signal inputs. For the instrument amplifier (IA), I use AD620 IC. One IA is connected to a reference resistor from VCCS, and the other one is placed at the observed object with the same gain value. The gain equation is:

@@ -1,2 +1,127 @@
 # MyEIT-V1.1
 Electrical Impedance Tomography using ESP32 S2 microcontroller with MicroPython - V1.1
+
+Based on [my previous project](https://github.com/RonAaron61/EIT-Microcontroller)
+
+---
+
+## List of content
+
+- [Abstract](#Absract)
+- [Introduction](#Instroduction)
+- [Design](#Design)
+- [Component](#Component)
+- [Programs](#Programs)
+- [Result](#Result)
+
+---
+
+## Abstract
+
+abstract
+
+---
+
+## Introduction
+
+intro
+
+---
+
+## Design
+
+The Electrical Impedance Tomography (EIT) that is made consists of several components such as the AD9833 module, amplifier, High Pass Filter, instrument amplifier, VCCS, multi/demultiplexer, AC DC converter, ADC, and of course, the microcontroller which uses the ESP32-S2
+
+---
+
+## Components
+
+### VCCS
+
+The function of VCCS is to get current sources that can be controlled using the input voltage, so the current doesn't exceed some limit. The VCCS that I used is the Discrete Improved Howland Current Pump With Buffer, based on
+
+> [Creegan A. et al. (2024)](https://doi.org/10.1016/j.ohx.2024.e00521)
+
+> [Ignacio V. L., Analysis of Improved Howland Current Pump Configurations](https://www.ti.com/lit/an/sboa437a/sboa437a.pdf?.)
+
+<img src="assets/image/VCCS.png" width=650></img>
+
+Where:
+
+$I_{VCCSOut} = \frac {A_{Howland} \times (V_p - V_n)} {R_S}$
+
+$A_{Howland} = \frac {R2}{R1}$, given R1 = R3 and R2 = R4
+
+Because R1 = R2 = R3 = R4 = 10KΩ, $A_{Howland} = 1$ , and $V_n = 0$
+
+$I_{VCCSOut} = \frac {V_p} {R_S} = \frac {V_p} {1000}$
+
+So, if using the same voltage as the previous version,
+
+$I_{VCCSOut} = \frac {500mV} {1000} = 0.5mA$
+
+### Instrument Amplifier
+
+The instrument amplifier functions as an amplifier from two different signal inputs. For the instrument amplifier (IA), I use AD620 IC. One IA is connected to a reference resistor from VCCS, and the other one is placed at the observed object with the same gain value. The gain equation is:
+
+$$ G = {49.4 kΩ \over R<sub>G</sub>} + 1 $$
+
+<img src="assets/image/AD620.png" width=600></img>
+
+On the second IA, there's also a High Pass Filter because the signal from the human body will also contain a noise such as Power Line Noise, so we will remove it using a High Pass Filter, I use first-order HPF with a 740 Hz cut-off frequency, with 1 uF capacitor and 220 Ω (215 tested on the multimeter). I first used 1 kΩ (Fc = 159 Hz) but the noise was still present so I tried higher Fc.
+
+### Positive to negative Converter
+
+Previous using a voltage divider, but required 2 times the voltage needed, which is 10V
+
+TPS60400 convert positive voltage from 1.6V to 5.5V into -1.6V to -5.5V
+
+<img src="assets/image/tps60400.png" width=650></img>
+
+only required three 1uF capacitor
+
+with an output maximum of only 60mA, still above the maximum current of the circuit, in which the negative voltage only gets used by 3 IC (2 OPA2134PA & 1 AD620)
+
+- OPA2134PA estimated current -> ±10mA per channel -> 40 mA total
+- AD620 estimated current -> ±1.6 mA max supply current
+  
+This is already being tested in pref board with 2 OPA2134PA and AD620 to simulate a non-inverting amplifier, VCCS + buffer, instrumental amplify with AD620, and buffer (to simulate AC to DC), and all IC run fine
+
+### ADS1115
+
+For the ADC I don't use the Microcontroller ADC but I use a module, I use the ADS1115 16bit ADC module 
+
+<img src="assets/image/ADS1115.jpg" width=500></img>
+
+### Multi/Demultiplexer
+
+Multi/Demultiplexer used is CD74HC4067 Module
+
+<img src="assets/image/CD74HC4067.jpg" width=500></img>
+
+### ESP32-S2 (Wemos S2 mini)
+
+<img src="assets/image/s2_mini_front.jpg" width=300/> <img src="assets/image/s2_mini_back.jpg" width=300/>
+
+For the microcontroller, I use Wemos S2 Mini, a mini wifi boards based ESP32-S2FN4R2. The reason I use this board is because of the compact size and it has lot of GPIO pin to use, because to drive the multi/demultiplexer I need at least 16 IO pin, then 2 pin for SDA/SCL, and 3 SPI connection
+
+
+## Result
+
+### PCB
+
+<img src="assets/image/pcb_1.png" width=650></img>
+
+<img src="assets/image/MyEIT_V1_1.jpg" width=650></img>
+
+*Note that in the image I use one CA324DE IC to replace one of the OPA2134PA ICs that I don't currently have. But using the IC also works fine
+
+### Peak-detector calibration
+
+The peak-detector not working smoothly and reduces the voltage by around 6%, which needs to be re-calibrate on the ADC
+
+<img src="assets/image/ADC_Cal.png" width=650></img>
+
+with, $voltage = voltage + (voltage* 6/100)$
+
+

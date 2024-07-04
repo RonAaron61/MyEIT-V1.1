@@ -155,3 +155,9 @@ and most of the time the data is very fluctuating resulting in a higher number t
 as for now, it is not clear what caused this, as I'm not able to analyze the data because my Oscilloscope is currently not accessible
 
 ---
+
+## Problems
+
+There are a couple of problems that encountered during the making of this project,
+
+- The ADS1115 ADC somehow can't read voltage lower than ±0.24V -> in the next version add a buffer after the output of AD620 and filter around 0.45V using a voltage divider then read it on channel A0, then compare to A1 which is connected to the same voltage divider as the reference voltage

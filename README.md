@@ -140,7 +140,9 @@ test
 
 ### Thorax
 
-Attempt to try to reconstruct the thorax area using 16 electrodes attached using disposable ECG Electrode with pre-gelled AG/AGCL sensor
+Attempt to try to reconstruct the thorax area using 16 electrodes attached using disposable ECG Electrode with pre-gelled AG/AGCL sensor placed around the thorax area bellow nipple
+
+<img src="assets/image/Thorax_electrode_2.jpg" width=350></img>
 
 The experiment starts with first collecting 10 data and averaging them to be used as the reference data, after that the actual data is then collected and reconstructed using JAC (One-step Gauss-Newton) method. The signal injected was using a 40kHz sine wave at around 0.4 mA. Based on the result, the data collected fluctuates, especially when the subject is moving. However, when the data collected is in good numbers, the data can be reconstructed resulting in two objects in the middle of the image, which are assumed to be lungs.
 
@@ -151,6 +153,10 @@ An example of the image when the data was good and the subject was not moving,
 and most of the time the data is very fluctuating resulting in a higher number than it should be, 
 
 <img src="assets/image/Thorax_2.png" width=900></img>
+
+another example when the data is in the good numbers,
+
+https://github.com/RonAaron61/MyEIT-V1.1/assets/105662575/0e5fefc8-61db-4f4e-9c7e-a2b2d6b81bc3
 
 as for now, it is not clear what caused this, as I'm not able to analyze the data because my Oscilloscope is currently not accessible
 

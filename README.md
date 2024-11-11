@@ -154,12 +154,13 @@ and most of the time the data is very fluctuating resulting in a higher number t
 
 <img src="assets/image/Thorax_2.png" width=900></img>
 
-another example is when the data is in good numbers, using 50kHz sine wave. 
+another example is when the data is in good numbers, using a 50kHz sine wave. 
 
 https://github.com/RonAaron61/MyEIT-V1.1/assets/105662575/0e5fefc8-61db-4f4e-9c7e-a2b2d6b81bc3
 
-as for now, it is not clear what caused this, as I'm not able to analyze the data because my Oscilloscope is currently not accessible. Also, I'm not really sure if it's just a coincidence that it shows
-two objects or it's a real image of lungs.
+
+As for now, it is not clear what caused this, as I'm not able to analyze the data because my Oscilloscope is currently not accessible. Also, I'm not really sure if it's just a coincidence that it shows
+two objects or it's a real image of lungs, because it doesn't show much difference when inhaling and exhaling.
 
 ---
 

@@ -108,7 +108,7 @@ Multi/Demultiplexer used is CD74HC4067 ICs which is a 16 channel multiplexer and
 
 ### ESP32-S2 (Wemos S2 mini)
 
-<img src="assets/image/s2_mini_front.jpg" width=300/> <img src="assets/image/s2_mini_back.jpg" width=300/>
+<img src="assets/image/s2_mini_front.jpeg" width=300/> <img src="assets/image/s2_mini_back.jpg" width=300/>
 
 For the microcontroller, I use Wemos S2 Mini, a mini wifi boards based ESP32-S2FN4R2. The reason I use this board is because of the compact size and it has lot of GPIO pin to use, because to drive the multi/demultiplexer I need at least 16 IO pins, then 2 pins for SDA/SCL, and 3 SPI connections
 
